@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentLinkController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BeneficiaryController;
 
 Route::get('/bookings', [BookingController::class, 'index']);
 Route::post('/bookings', [BookingController::class, 'store']);
@@ -15,6 +16,13 @@ Route::get('/inventories', [InventoryController::class, 'index']);
 
 Route::post('/inventories', [InventoryController::class, 'store']);
 
+use App\Http\Controllers\BeneficiariesController;
+
+Route::get('/beneficiaries', [BeneficiariesController::class, 'index']);
+Route::post('/beneficiaries', [BeneficiariesController::class, 'store']);
+Route::get('/beneficiaries/{id}', [BeneficiariesController::class, 'show']);
+Route::put('/beneficiaries/{id}', [BeneficiariesController::class, 'update']);
+Route::delete('/beneficiaries/{id}', [BeneficiariesController::class, 'destroy']);
 
 /*
 |--------------------------------------------------------------------------
