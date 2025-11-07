@@ -266,6 +266,8 @@ const Badge = { props: ['class'], template: `<span :class="class"><slot/></span>
 import { Loading } from 'notiflix/build/notiflix-loading-aio'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import { usePage } from '@inertiajs/vue3'
+import { onMounted, ref } from 'vue'
+import DashboardLayout from '@/Layouts/DashboardLayout.vue'
 
 onMounted(async () => {
   try {

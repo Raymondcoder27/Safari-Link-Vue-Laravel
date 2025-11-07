@@ -98,11 +98,13 @@ const Badge = {
                     </Button>
                     <Link href="/" class="flex items-center gap-2">
                     <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                        <span class="text-primary-foreground font-bold text-sm">SL</span>
+                        <!-- <span class="text-primary-foreground font-bold text-sm">SL</span> -->
+                         <!-- logo -->
+                            <img src="/logo.png" alt="Safari-Link" class="w-15 h-15">
                     </div>
-                    <span class="text-sidebar-foreground font-semibold text-lg">
+                    <!-- <span class="text-sidebar-foreground font-semibold text-lg">
                         Safari-Link
-                    </span>
+                    </span> -->
                     </Link>
                 </div>
 
