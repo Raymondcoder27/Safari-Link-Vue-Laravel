@@ -102,9 +102,9 @@ const Badge = {
                          <!-- logo -->
                             <img src="/logo.png" alt="Safari-Link" class="w-15 h-15">
                     </div>
-                    <!-- <span class="text-sidebar-foreground font-semibold text-lg">
+                    <span class="text-sidebar-foreground font-semibold text-lg">
                         Safari-Link
-                    </span> -->
+                    </span>
                     </Link>
                 </div>
 
