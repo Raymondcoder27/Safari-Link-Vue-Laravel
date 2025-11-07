@@ -1,7 +1,6 @@
-<template>
+<!-- <template>
   <DashboardLayout>
     <div class="p-6 space-y-6">
-      <!-- Header -->
       <div class="flex items-center justify-between">
         <div>
           <h1 class="text-2xl font-semibold text-foreground">Clients</h1>
@@ -9,7 +8,6 @@
         </div>
       </div>
 
-      <!-- Search and Filters -->
       <div class="flex items-center gap-4">
         <div class="relative flex-1 max-w-md">
           <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -33,7 +31,6 @@
         </Select>
       </div>
 
-      <!-- Empty State -->
       <div class="flex flex-col items-center justify-center py-16">
         <div class="w-12 h-12 bg-muted rounded-full flex items-center justify-center mb-4">
           <Info class="h-6 w-6 text-muted-foreground" />
@@ -41,7 +38,6 @@
         <h3 class="text-lg font-medium text-foreground mb-2">No Customers</h3>
       </div>
 
-      <!-- Footer -->
       <div class="pt-8">
         <p class="text-xs text-muted-foreground">© 2025 Safari-Link, All rights Reserved</p>
       </div>
@@ -100,4 +96,161 @@ const sortBy = ref('')
 
 <style scoped>
 /* Add any scoped styles here */
-</style>
+</style> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<template>
+  <DashboardLayout>
+    <div class="p-6 space-y-6">
+      <!-- Header -->
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-2xl font-semibold text-foreground">Clients</h1>
+          <p class="text-sm text-muted-foreground">Manage your clients</p>
+        </div>
+        <button
+          class="bg-green-600 text-white px-3 py-2 rounded flex items-center gap-2"
+          @click="showModal = true"
+        >
+          + Add Client
+        </button>
+      </div>
+
+      <!-- Search -->
+      <div class="flex items-center gap-4">
+        <div class="relative flex-1 max-w-md">
+          <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder="Search..."
+            v-model="searchQuery"
+            class="px-3 py-2 border rounded w-full pl-10"
+          />
+        </div>
+        <input type="date" class="px-3 py-2 border rounded w-40" v-model="startDate" />
+        <input type="date" class="px-3 py-2 border rounded w-40" v-model="endDate" />
+      </div>
+
+      <!-- Customers Table -->
+      <div v-if="customers.length" class="border rounded overflow-x-auto">
+        <table class="min-w-full divide-y divide-border">
+          <thead class="bg-muted">
+            <tr>
+              <th class="px-4 py-2 text-left text-sm font-medium text-muted-foreground">Name</th>
+              <th class="px-4 py-2 text-left text-sm font-medium text-muted-foreground">Email</th>
+              <th class="px-4 py-2 text-left text-sm font-medium text-muted-foreground">Phone</th>
+            </tr>
+          </thead>
+          <tbody class="bg-background divide-y divide-border">
+            <tr v-for="customer in customers" :key="customer.id">
+              <td class="px-4 py-2">{{ customer.name }}</td>
+              <td class="px-4 py-2">{{ customer.email }}</td>
+              <td class="px-4 py-2">{{ customer.phone }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty State -->
+      <div v-else class="flex flex-col items-center justify-center py-16">
+        <div class="w-12 h-12 bg-muted rounded-full flex items-center justify-center mb-4">
+          <Info class="h-6 w-6 text-muted-foreground" />
+        </div>
+        <h3 class="text-lg font-medium text-foreground mb-2">No Customers</h3>
+      </div>
+
+      <!-- Add Customer Modal -->
+      <div v-if="showModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md space-y-4">
+          <h2 class="text-lg font-semibold">Add Customer</h2>
+          <input type="text" placeholder="Name" v-model="newCustomer.name" class="px-3 py-2 border rounded w-full" />
+          <input type="email" placeholder="Email" v-model="newCustomer.email" class="px-3 py-2 border rounded w-full" />
+          <input type="text" placeholder="Phone" v-model="newCustomer.phone" class="px-3 py-2 border rounded w-full" />
+          <div class="flex justify-end gap-2">
+            <button class="px-3 py-2 border rounded" @click="showModal=false">Cancel</button>
+            <button class="px-3 py-2 bg-green-600 text-white rounded" @click="createCustomer">Save</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="pt-8">
+        <p class="text-xs text-muted-foreground">© 2025 Safari-Link, All rights Reserved</p>
+      </div>
+    </div>
+  </DashboardLayout>
+</template>
+
+<script setup>
+import DashboardLayout from '@/Layouts/DashboardLayout.vue'
+import { ref, onMounted } from 'vue'
+import { Search, Info } from 'lucide-vue-next'
+
+const customers = ref([])
+const showModal = ref(false)
+const newCustomer = ref({ name: '', email: '', phone: '' })
+const searchQuery = ref('')
+const startDate = ref('')
+const endDate = ref('')
+
+const API_URL = import.meta.env.VITE_API_URL + '/api/customers'
+
+const loadCustomers = async () => {
+  const res = await fetch(API_URL)
+  customers.value = await res.json()
+}
+
+const createCustomer = async () => {
+  if (!newCustomer.value.name || !newCustomer.value.email || !newCustomer.value.phone) return alert('Fill all fields')
+
+  await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newCustomer.value)
+  })
+
+  newCustomer.value = { name: '', email: '', phone: '' }
+  showModal.value = false
+  await loadCustomers()
+}
+
+onMounted(loadCustomers)
+</script>

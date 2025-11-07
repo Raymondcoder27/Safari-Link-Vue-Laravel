@@ -3,6 +3,17 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentLinkController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\BookingController;
+
+Route::get('/bookings', [BookingController::class, 'index']);
+Route::post('/bookings', [BookingController::class, 'store']);
+
+
+Route::get('/inventories', [InventoryController::class, 'index']);
+
+
+Route::post('/inventories', [InventoryController::class, 'store']);
 
 
 /*

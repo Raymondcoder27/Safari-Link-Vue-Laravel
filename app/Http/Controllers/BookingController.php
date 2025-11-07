@@ -2,17 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use App\Models\Booking;
 
 class BookingController extends Controller
 {
-    public function index(): JsonResponse
+    public function index()
     {
-        $bookings = [
-            ['id' => 1, 'date' => '2025-10-01', 'customer' => 'John Doe'],
-            ['id' => 2, 'date' => '2025-10-02', 'customer' => 'Jane Smith'],
-        ];
+        return response()->json(Booking::all());
+    }
 
-        return response()->json($bookings);
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'customer_name' => 'required|string',
+            'service_type' => 'required|string',
+            'date' => 'required|date',
+            'status' => 'sometimes|string'
+        ]);
+
+        $booking = Booking::create($validated);
+
+        return response()->json($booking, 201);
     }
 }
