@@ -49,6 +49,11 @@ Route::get('/bookings', function () {
     return Inertia::render('Dashboard/Bookings');
 })->middleware(['auth', 'verified'])->name('bookings');
 
+// subscriptions
+Route::get('/subscriptions' , function () {
+    return Inertia::render('Dashboard/Subscriptions');
+})->middleware(['auth', 'verified'])->name('subscriptions');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -39,6 +39,7 @@ const navigation = [
     { name: "Bookings", href: "/bookings", icon: Calendar },
     { name: "Customers", href: "/customers", icon: Users },
     { name: "My Business", href: "/mybusiness", icon: Settings },
+    { name: "Subscriptions", href: "/subscriptions", icon: CreditCard },
 ]
 
 const financeNavigation = [
