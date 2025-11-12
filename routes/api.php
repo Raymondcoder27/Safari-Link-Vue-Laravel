@@ -13,6 +13,9 @@ Route::post('/bookings', [BookingController::class, 'store']);
 
 Route::get('/inventories', [InventoryController::class, 'index']);
 
+    Route::get('itineraries', [ItineraryController::class, 'index']);
+    Route::get('itineraries/{id}', [ItineraryController::class, 'show']);
+    Route::post('itineraries', [ItineraryController::class, 'store']);
 
 Route::post('/inventories', [InventoryController::class, 'store']);
 

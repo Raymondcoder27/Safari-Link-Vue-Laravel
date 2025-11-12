@@ -134,7 +134,12 @@
               <td class="p-4 text-foreground">{{ link.currency }}</td>
               <td class="p-4 text-foreground">{{ link.description }}</td>
               <td class="p-4 flex gap-2">
-                <button @click="copyLink(link)" class="bg-blue-500 text-white px-2 py-1 rounded-md text-sm">
+                <!-- view details -->
+                  <!-- <router-link :to="`/payment-links-details/${link.id}`" class="bg-blue-500 cursor-pointer text-white px-2 py-1 rounded-md text-sm"> -->
+                  <Link href="/payment-links-details" class="bg-blue-500 cursor-pointer text-white px-2 py-1 rounded-md text-sm">
+                    Details
+                  </Link>
+                <button @click="copyLink(link)" class="bg-gray-500 text-white px-2 py-1 rounded-md text-sm">
                   Copy
                 </button>
                 <button @click="shareLink(link)" class="bg-green-500 text-white px-2 py-1 rounded-md text-sm">
@@ -159,7 +164,7 @@
 import { ref } from 'vue'
 import DashboardLayout from '@/Layouts/DashboardLayout.vue'
 import { Plus, MoreHorizontal } from 'lucide-vue-next'
-
+import { Link, usePage } from "@inertiajs/vue3"
 
 async function createPaymentLink() {
   try {

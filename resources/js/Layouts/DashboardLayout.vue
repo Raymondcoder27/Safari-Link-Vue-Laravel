@@ -44,7 +44,7 @@ const navigation = [
 const financeNavigation = [
     { name: "Finance", href: "/finance", icon: DollarSign },
     { name: "Payment Links", href: "/payment-links", icon: CreditCard },
-    { name: "Payment Links Details", href: "/payment-links-details", icon: CreditCard },
+    // { name: "Payment Links Details", href: "/payment-links-details", icon: CreditCard },
     { name: "Beneficiaries", href: "/beneficiaries", icon: UserCheck },
 ]
 
